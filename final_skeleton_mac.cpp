@@ -80,6 +80,7 @@ int main(int argc, char* argv[]) {
       } else {
         manager.print();
       }
+      if (manager.my_plane.hp <= 0) break;
       gettimeofday(&tv, NULL);
       end = tv.tv_sec * 1000000 + tv.tv_usec;
       int prev_frame = operation_time / frame_length;
@@ -136,6 +137,7 @@ int main(int argc, char* argv[]) {
   }
   close_keyboard();
   endwin();
+  cout << "Yout score is 0" << endl;
 
   return 0;
 }

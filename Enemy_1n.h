@@ -21,6 +21,6 @@ class Enemy_1n : public Unit {
 
   void crash(My_plane my_plane) { --my_plane.hp; }
 
-  void print() override { printw("Z"); }
+  void print() override { printw("%c", character); }
 };
 #endif

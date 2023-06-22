@@ -15,7 +15,7 @@ class Unit {
 
   // virtual void crash(My_plane my_plane) = 0;
 
-  virtual void print() const = 0;
+  virtual void print() = 0;
 
   virtual ~Unit() {}
 };

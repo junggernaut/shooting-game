@@ -79,6 +79,8 @@ void Screen_manager::print_share() {
   printw("%d", shot_frame);
   move(34, 0);
   printw("%d", check_frame);
+  move(35, 0);
+  printw("%d", this->my_plane.hp);
 }
 
 // print when key didn't pressed
@@ -127,6 +129,14 @@ void Screen_manager::print(int ch) {  // ascii
       this->my_plane.y += 1;
       move(this->my_plane.y, this->my_plane.x);
       printw("M");
+    }
+  }
+
+  // iterate screenmanager's unit vector and check myplane.x, myplane.y is on
+  // unit.x, unit.y (check my plane and unit crash)
+  for (const auto& iter : this->units) {
+    if (iter->y == this->my_plane.y && iter->x == this->my_plane.x) {
+      this->my_plane.hp -= 1;
     }
   }
 
