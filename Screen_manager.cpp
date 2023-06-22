@@ -67,6 +67,12 @@ void Screen_manager::print_share() {
   }
   // Bullet part ends
 
+  for (const auto& iter : this->units) {
+    move(iter->y, iter->x);
+
+    iter->print();
+  }
+
   move(32, 0);
   printw("current frame: %d", curr_frame);
   move(33, 0);
@@ -92,6 +98,7 @@ void Screen_manager::print(int ch) {  // ascii
       printw(" ");
       this->my_plane.x += 1;
       move(this->my_plane.y, this->my_plane.x);
+
       printw("M");
     }
   } else if (ch == 'a') {  // left

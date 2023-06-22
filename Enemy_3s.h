@@ -3,11 +3,13 @@
 
 using namespace std;
 
+#include "My_plane.h"
 #include "Unit.h"
 
 class Enemy_3s : public Unit {
  public:
-  Enemy_3s(int y_value, int x_value) : Unit(y_value, x_value){};
+  Enemy_3s(int y_value, int x_value, char character)
+      : Unit(y_value, x_value, character){};
 
   int hp = 4;
   int cell_speed = 9;  // The enemy moves 1 cell for every 0.9 seconds
@@ -20,5 +22,8 @@ class Enemy_3s : public Unit {
   void create_bullet() {
     // Implement bullet creation logic here
   }
+  void crash(My_plane my_plane) { --my_plane.hp; }
+
+  void print() { printw("%c", character); }
 };
 #endif

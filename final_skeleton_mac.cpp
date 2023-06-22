@@ -24,7 +24,7 @@
 using namespace std;
 
 // main function
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   ifstream input;
   string input_file = string(argv[1]);
   if (argc != 2) {
@@ -88,21 +88,28 @@ int main(int argc, char *argv[]) {
 
       if (manager.curr_frame >= manager.frame_event[event_index]) {
         if (manager.type_event[event_index] == 'n') {
-          manager.my_plane.units.push_back(Enemy_1n(
-              manager.y_event[event_index], manager.x_event[event_index]));
-        } else if (manager.type_event[event_index] == 'r') {
-          manager.my_plane.units.push_back(Enemy_2r(
-              manager.y_event[event_index], manager.x_event[event_index]));
-        } else if (manager.type_event[event_index] == 's') {
-          manager.my_plane.units.push_back(Enemy_3s(
-              manager.y_event[event_index], manager.x_event[event_index]));
-        } else if (manager.type_event[event_index] == 'd') {
-          manager.my_plane.units.push_back(Enemy_4d(
-              manager.y_event[event_index], manager.x_event[event_index]));
-        } else if (manager.type_event[event_index] == 'a') {
-          manager.my_plane.units.push_back(Enemy_5a(
-              manager.y_event[event_index], manager.x_event[event_index]));
+          Enemy_1n* newEnemy = new Enemy_1n(manager.y_event[event_index],
+                                            manager.x_event[event_index], 'n');
+          manager.units.push_back(newEnemy);
+          // } else if (manager.type_event[event_index] == 'r') {
+          //   manager.units.push_back(&Enemy_2r(manager.y_event[event_index],
+          //                                    manager.x_event[event_index],
+          //                                    'r'));
+          // } else if (manager.type_event[event_index] == 's') {
+          //   manager.units.push_back(&Enemy_3s(manager.y_event[event_index],
+          //                                    manager.x_event[event_index],
+          //                                    's'));
+          // } else if (manager.type_event[event_index] == 'd') {
+          //   manager.units.push_back(&Enemy_4d(manager.y_event[event_index],
+          //                                    manager.x_event[event_index],
+          //                                    'd'));
+          // } else if (manager.type_event[event_index] == 'a') {
+          //   manager.units.push_back(&Enemy_5a(manager.y_event[event_index],
+          //                                    manager.x_event[event_index],
+          //                                    'a'));
+          // }
         }
+        event_index++;
       }
 
       /*Objects operate every 0.1 seconds.

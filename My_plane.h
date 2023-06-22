@@ -32,6 +32,5 @@ class My_plane {
   int check_frame_my_plane = 0;
   int hp = 5;
   vector<Bullet> bullet;
-  vector<Unit> units;
 };
 #endif
