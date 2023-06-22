@@ -1,12 +1,14 @@
 #ifndef ENEMY_2R_H
 #define ENEMY_2R_H
 
-#include "Enemy_1n.h"
+#include "Unit.h"
 
 using namespace std;
 
-class Enemy_2r : Enemy_1n {
+class Enemy_2r : public Unit {
  public:
+   Enemy_2r(int y_value, int x_value) : Unit(y_value, x_value){};
+
   int hp = 5;
   int cell_speed = 3;  // The enemy moves 1 cell for every 0.3 seconds
   int score = 2;

@@ -13,6 +13,11 @@
 #include <iostream>
 #include <vector>
 
+#include "Enemy_1n.h"
+#include "Enemy_2r.h"
+#include "Enemy_3s.h"
+#include "Enemy_4d.h"
+#include "Enemy_5a.h"
 #include "Screen_manager.h"
 #include "keyboard_controller.cpp"
 
@@ -48,6 +53,7 @@ int main(int argc, char *argv[]) {
   double start, end;
   double operation_time = 0;  // microseconds
   double frame_length = manager.frame_length;
+  int event_index = 0;
 
   std::cout << "Start game~!" << endl;
   setlocale(LC_ALL, "");
@@ -80,9 +86,29 @@ int main(int argc, char *argv[]) {
       operation_time += (end - start);
       manager.curr_frame = operation_time / frame_length;
 
+      if (manager.curr_frame >= manager.frame_event[event_index]) {
+        if (manager.type_event[event_index] == 'n') {
+          manager.my_plane.units.push_back(Enemy_1n(
+              manager.y_event[event_index], manager.x_event[event_index]));
+        } else if (manager.type_event[event_index] == 'r') {
+          manager.my_plane.units.push_back(Enemy_2r(
+              manager.y_event[event_index], manager.x_event[event_index]));
+        } else if (manager.type_event[event_index] == 's') {
+          manager.my_plane.units.push_back(Enemy_3s(
+              manager.y_event[event_index], manager.x_event[event_index]));
+        } else if (manager.type_event[event_index] == 'd') {
+          manager.my_plane.units.push_back(Enemy_4d(
+              manager.y_event[event_index], manager.x_event[event_index]));
+        } else if (manager.type_event[event_index] == 'a') {
+          manager.my_plane.units.push_back(Enemy_5a(
+              manager.y_event[event_index], manager.x_event[event_index]));
+        }
+      }
+
       /*Objects operate every 0.1 seconds.
-      Call refresh() every 0.1 seconds(or every 0.1*n seconds if manager.print()
-      takes a long time) ex) if operation_time changes to 0.25->0.30, refresh()
+      Call refresh() every 0.1 seconds(or every 0.1*n seconds if
+      manager.print() takes a long time) ex) if operation_time changes to
+      0.25->0.30, refresh()
 
       You can modify your manager.print() using multi-threading or not.
       If you use multi-threading, you may print more frequently.

@@ -3,8 +3,12 @@
 
 using namespace std;
 
-class Enemy_3s {
+#include "Unit.h"
+
+class Enemy_3s : public Unit {
  public:
+  Enemy_3s(int y_value, int x_value) : Unit(y_value, x_value){};
+
   int hp = 4;
   int cell_speed = 9;  // The enemy moves 1 cell for every 0.9 seconds
   int score = 3;

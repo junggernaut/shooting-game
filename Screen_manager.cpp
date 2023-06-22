@@ -69,9 +69,10 @@ void Screen_manager::print_share() {
 
   move(32, 0);
   printw("current frame: %d", curr_frame);
-
-  // print shot_frame
-  printw("");
+  move(33, 0);
+  printw("%d", shot_frame);
+  move(34, 0);
+  printw("%d", check_frame);
 }
 
 // print when key didn't pressed
