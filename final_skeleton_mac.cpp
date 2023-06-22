@@ -58,31 +58,47 @@ int main(int argc, char *argv[]) {
   refresh();
 
   int ch = 0;
+  bool pause = false;
   while (ch != 'x') {
-    gettimeofday(&tv, NULL);
-    start = tv.tv_sec * 1000000 + tv.tv_usec;
-    if (kbhit()) {
-      ch = readch();
-      manager.print(ch);
-      if (ch == 'x') break;
+    if (pause == false) {
+      gettimeofday(&tv, NULL);
+      start = tv.tv_sec * 1000000 + tv.tv_usec;
+      if (kbhit()) {
+        ch = readch();
+        if (ch == 'p') {
+          pause = true;
+          continue;
+        }
+        manager.print(ch);
+        if (ch == 'x') break;
+      } else {
+        manager.print();
+      }
+      gettimeofday(&tv, NULL);
+      end = tv.tv_sec * 1000000 + tv.tv_usec;
+      int prev_frame = operation_time / frame_length;
+      operation_time += (end - start);
+      manager.curr_frame = operation_time / frame_length;
+
+      /*Objects operate every 0.1 seconds.
+      Call refresh() every 0.1 seconds(or every 0.1*n seconds if manager.print()
+      takes a long time) ex) if operation_time changes to 0.25->0.30, refresh()
+
+      You can modify your manager.print() using multi-threading or not.
+      If you use multi-threading, you may print more frequently.
+      You can reduce the execution time of manager.print() using
+      multi-threading*/
+      if (manager.curr_frame - prev_frame > 0) {
+        refresh();  // print the screen
+      }
     } else {
-      manager.print();
-    }
-    gettimeofday(&tv, NULL);
-    end = tv.tv_sec * 1000000 + tv.tv_usec;
-    int prev_frame = operation_time / frame_length;
-    operation_time += (end - start);
-    manager.curr_frame = operation_time / frame_length;
-
-    /*Objects operate every 0.1 seconds.
-    Call refresh() every 0.1 seconds(or every 0.1*n seconds if manager.print()
-    takes a long time) ex) if operation_time changes to 0.25->0.30, refresh()
-
-    You can modify your manager.print() using multi-threading or not.
-    If you use multi-threading, you may print more frequently.
-    You can reduce the execution time of manager.print() using multi-threading*/
-    if (manager.curr_frame - prev_frame > 0) {
-      refresh();  // print the screen
+      if (kbhit()) {
+        ch = readch();
+        if (ch == 'r') {
+          pause = false;
+          continue;
+        }
+      }
     }
   }
   close_keyboard();

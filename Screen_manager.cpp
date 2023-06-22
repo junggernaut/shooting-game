@@ -68,7 +68,8 @@ void Screen_manager::print_share() {
   // Bullet part ends
 
   move(32, 0);
-  printw("shot_frame: ");
+  printw("current frame: %d", curr_frame);
+
   // print shot_frame
   printw("");
 }
