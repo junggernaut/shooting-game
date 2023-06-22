@@ -1,9 +1,11 @@
 #ifndef ENEMY_2R_H
 #define ENEMY_2R_H
 
+#include "Enemy_1n.h"
+
 using namespace std;
 
-class Enemy_2r {
+class Enemy_2r : Enemy_1n {
  public:
   int hp = 5;
   int cell_speed = 3;  // The enemy moves 1 cell for every 0.3 seconds
