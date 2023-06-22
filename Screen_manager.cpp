@@ -56,6 +56,18 @@ void Screen_manager::print_share() {
         }
         iter->y -= shot_frame;
         move(iter->y, iter->x);
+
+        for (auto currentUnit = this->units.begin();
+             currentUnit < this->units.end(); currentUnit++) {
+          if (iter->y == (*currentUnit)->y && iter->x == (*currentUnit)->x) {
+            (*currentUnit)->shot(iter->damage);
+            if ((*currentUnit)->hp <= 0) {
+              move((*currentUnit)->y, (*currentUnit)->x);
+              this->units.erase(currentUnit);
+            }
+            this->my_plane.bullet.erase(iter);
+          }
+        }
         if (iter->level == 1) {
           printw("'");
         }

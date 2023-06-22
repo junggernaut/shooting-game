@@ -12,8 +12,11 @@ class Unit {
 
   int y, x;
   char character;
+  int hp;
 
   // virtual void crash(My_plane my_plane) = 0;
+
+  virtual void shot(int bulletLevel) = 0;
 
   virtual void print() = 0;
 

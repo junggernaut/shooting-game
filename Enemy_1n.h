@@ -17,7 +17,8 @@ class Enemy_1n : public Unit {
   int hp = 10;
   int score = 1;
 
-  void shot(My_plane my_plane, Bullet bullet) { my_plane.hp -= bullet.level; }
+  // decrease hp by bulletLevel
+  void shot(int bulletLevel) override { hp -= bulletLevel; }
 
   void crash(My_plane my_plane) { --my_plane.hp; }
 
